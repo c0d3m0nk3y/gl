@@ -6,9 +6,16 @@
 #define WINDOW_WIDTH 800
 #define WINDOW_HEIGHT 600
 
+float angle = 0.0f;
+
 static void DisplayCallback(void) {
+	glClearColor(1.0f, 0.0f, 1.0f, 1.0f);
 	glClear(GL_COLOR_BUFFER_BIT);
-	glutSolidCube(1);
+	glMatrixMode(GL_MODELVIEW);
+	glLoadIdentity();
+	angle += 2.0f;
+	glRotatef(angle, 1, 1, 1);
+	glutWireTeapot(0.7f);
 	glFlush();
 	glutSwapBuffers();
 }
@@ -34,7 +41,7 @@ static void MotionCallback(int x, int y) {
 }
 
 static void IdleCallback(void) {
-
+	DisplayCallback();
 }
 
 int main(int argc, char *argv[]) {
